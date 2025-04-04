@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal, User, Server, Database, GitBranch, Award, BookOpen, Code, Monitor, Activity, Package, Clock, Briefcase, Mail, Phone, Linkedin, Github , Globe, ChevronRight } from 'lucide-react';
+import { Terminal, User, Server, Database, GitBranch, Award, BookOpen, Code, Monitor, Activity, Package, Clock, Briefcase, Mail, Phone, Linkedin, Github, Globe, ChevronRight } from 'lucide-react';
 
 const TerminalPortfolio = () => {
   const [input, setInput] = useState('');
@@ -42,7 +42,7 @@ const TerminalPortfolio = () => {
                 <Linkedin size={16} className="mr-1" /> LinkedIn
               </a>
               <a href="https://github.com/toymakerftw" className="flex items-center text-blue-400 hover:underline">
-                <GitHub size={16} className="mr-1" /> GitHub
+                <Github size={16} className="mr-1" /> GitHub
               </a>
               <a href="https://toymakerftw.github.io" className="flex items-center text-blue-400 hover:underline">
                 <Globe size={16} className="mr-1" /> Website
@@ -58,7 +58,7 @@ const TerminalPortfolio = () => {
         return (
           <div className="mb-2">
             <p className="text-green-400 font-bold">Work Experience:</p>
-            
+
             <div className="mb-4 mt-2">
               <div className="flex items-center">
                 <Briefcase size={16} className="text-yellow-400 mr-2" />
@@ -73,7 +73,7 @@ const TerminalPortfolio = () => {
                 <li>Developed automation scripts for infrastructure management and security compliance.</li>
               </ul>
             </div>
-            
+
             <div className="mb-2">
               <div className="flex items-center">
                 <Briefcase size={16} className="text-yellow-400 mr-2" />
@@ -98,7 +98,7 @@ const TerminalPortfolio = () => {
         return (
           <div className="mb-2">
             <p className="text-green-400 font-bold">Projects:</p>
-            
+
             <div className="mb-4 mt-2">
               <div className="flex items-center">
                 <Code size={16} className="text-yellow-400 mr-2" />
@@ -112,7 +112,7 @@ const TerminalPortfolio = () => {
                 <li>Supports multi-node deployment for large-scale infrastructure.</li>
               </ul>
             </div>
-            
+
             <div className="mb-4">
               <div className="flex items-center">
                 <Code size={16} className="text-yellow-400 mr-2" />
@@ -126,7 +126,7 @@ const TerminalPortfolio = () => {
                 <li>Developed in Python with a cloud-native architecture.</li>
               </ul>
             </div>
-            
+
             <div className="mb-2">
               <div className="flex items-center">
                 <Code size={16} className="text-yellow-400 mr-2" />
@@ -149,7 +149,7 @@ const TerminalPortfolio = () => {
         return (
           <div className="mb-2">
             <p className="text-green-400 font-bold mb-2">Technical Skills:</p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start">
                 <Code size={16} className="text-yellow-400 mr-2 mt-1" />
@@ -158,7 +158,7 @@ const TerminalPortfolio = () => {
                   <p>Python, Go, Bash</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <Server size={16} className="text-yellow-400 mr-2 mt-1" />
                 <div>
@@ -166,7 +166,7 @@ const TerminalPortfolio = () => {
                   <p>Terraform, Kubernetes, Docker</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <Activity size={16} className="text-yellow-400 mr-2 mt-1" />
                 <div>
@@ -174,7 +174,7 @@ const TerminalPortfolio = () => {
                   <p>GitLab CI/CD, GitHub Actions, Ansible</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <Monitor size={16} className="text-yellow-400 mr-2 mt-1" />
                 <div>
@@ -182,7 +182,7 @@ const TerminalPortfolio = () => {
                   <p>Prometheus, Grafana, ELK Stack, Zabbix</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <Globe size={16} className="text-yellow-400 mr-2 mt-1" />
                 <div>
@@ -190,7 +190,7 @@ const TerminalPortfolio = () => {
                   <p>HAProxy, Squid Proxy, Nginx, Apache</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <Database size={16} className="text-yellow-400 mr-2 mt-1" />
                 <div>
@@ -198,7 +198,7 @@ const TerminalPortfolio = () => {
                   <p>PostgreSQL, MySQL, Redis</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <GitBranch size={16} className="text-yellow-400 mr-2 mt-1" />
                 <div>
@@ -206,7 +206,7 @@ const TerminalPortfolio = () => {
                   <p>Git, GitHub, GitLab</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <Terminal size={16} className="text-yellow-400 mr-2 mt-1" />
                 <div>
@@ -225,7 +225,7 @@ const TerminalPortfolio = () => {
         return (
           <div className="mb-2">
             <p className="text-green-400 font-bold">Education:</p>
-            
+
             <div className="mt-2">
               <div className="flex items-center">
                 <BookOpen size={16} className="text-yellow-400 mr-2" />
@@ -233,7 +233,7 @@ const TerminalPortfolio = () => {
               </div>
               <p className="ml-6">SNGCE, Kolenchery (2023)</p>
             </div>
-            
+
             <div className="mt-2">
               <div className="flex items-center">
                 <BookOpen size={16} className="text-yellow-400 mr-2" />
@@ -241,7 +241,7 @@ const TerminalPortfolio = () => {
               </div>
               <p className="ml-6">IPSR Solutions, Ernakulam (2017)</p>
             </div>
-            
+
             <div className="mt-2">
               <div className="flex items-center">
                 <BookOpen size={16} className="text-yellow-400 mr-2" />
@@ -259,13 +259,13 @@ const TerminalPortfolio = () => {
         return (
           <div className="mb-2">
             <p className="text-green-400 font-bold">Certifications:</p>
-            
+
             <div className="mt-2">
               <div className="flex items-center">
                 <Award size={16} className="text-yellow-400 mr-2" />
                 <span className="text-yellow-400 font-bold">RHCSA - Red Hat Certified System Administrator</span>
               </div>
-              <p className="ml-6">Verified at: Red Hat Certification Portal</p>
+              <p className="ml-6">Verified at: <a href="https://rhtapps.redhat.com/verify?certId=170-218-770" className="text-blue-400 hover:underline">Red Hat Certification Portal</a></p>
             </div>
           </div>
         );
@@ -277,36 +277,42 @@ const TerminalPortfolio = () => {
         return (
           <div className="mb-2">
             <p className="text-green-400 font-bold">Contact Information:</p>
-            
+
             <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="flex items-center">
                 <Mail size={16} className="text-yellow-400 mr-2" />
                 <span className="text-yellow-400 font-bold">Email:</span>
                 <a href="mailto:mail.anandhraman@gmail.com" className="ml-2 text-blue-400 hover:underline">mail.anandhraman@gmail.com</a>
               </div>
-              
+
               <div className="flex items-center">
                 <Phone size={16} className="text-yellow-400 mr-2" />
                 <span className="text-yellow-400 font-bold">Phone:</span>
                 <span className="ml-2">+91 70127 45003</span>
               </div>
-              
+
               <div className="flex items-center">
-                <GitHub size={16} className="text-yellow-400 mr-2" />
+                <Github size={16} className="text-yellow-400 mr-2" />
                 <span className="text-yellow-400 font-bold">GitHub:</span>
                 <a href="https://github.com/toymakerftw" className="ml-2 text-blue-400 hover:underline">toymakerftw</a>
               </div>
-              
+
               <div className="flex items-center">
                 <Linkedin size={16} className="text-yellow-400 mr-2" />
                 <span className="text-yellow-400 font-bold">LinkedIn:</span>
-                <a href="https://linkedin.com/in/anandh-raman" className="ml-2 text-blue-400 hover:underline">anandh-raman</a>
+                <a href="https://www.linkedin.com/in/anandh-raman-942374153" className="ml-2 text-blue-400 hover:underline">anandh-raman</a>
               </div>
-              
+
               <div className="flex items-center">
                 <Globe size={16} className="text-yellow-400 mr-2" />
                 <span className="text-yellow-400 font-bold">Website:</span>
                 <a href="https://toymakerftw.github.io" className="ml-2 text-blue-400 hover:underline">toymakerftw.github.io</a>
+              </div>
+
+              <div className="flex items-center">
+                <Package size={16} className="text-yellow-400 mr-2" />
+                <span className="text-yellow-400 font-bold">Location:</span>
+                <span className="ml-2">Kolenchery, Kerala, India</span>
               </div>
             </div>
           </div>
@@ -360,7 +366,7 @@ const TerminalPortfolio = () => {
         )
       }
     ]);
-    
+
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -392,7 +398,7 @@ const TerminalPortfolio = () => {
 
   const executeCommand = () => {
     const trimmedInput = input.trim();
-    
+
     // Add command to history
     setHistory(prev => [
       ...prev,
@@ -448,9 +454,9 @@ const TerminalPortfolio = () => {
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
         </div>
       </div>
-      
+
       {/* Terminal Content */}
-      <div 
+      <div
         ref={terminalRef}
         className="flex-1 bg-gray-900 p-4 font-mono text-white overflow-y-auto"
         onClick={handleTerminalClick}
@@ -466,13 +472,13 @@ const TerminalPortfolio = () => {
                 <span>{item.content}</span>
               </div>
             )}
-            
+
             {item.type === 'output' && (
               <div>{item.content}</div>
             )}
           </div>
         ))}
-        
+
         {/* Current Input Line */}
         <div className="flex items-center">
           <span className="text-green-400">anandhraman@portfolio:</span>
