@@ -5,12 +5,14 @@ import {
   Github, Globe, ChevronRight, Cpu, MemoryStick, HardDrive
 } from 'lucide-react';
 import profileImage from './assets/profile.png';
+import resumePdf from './assets/resume.pdf';
 
 const socialLinks = [
   { name: 'email', url: 'mailto:mail.anandhraman@gmail.com', icon: Mail, label: 'Email' },
   { name: 'linkedin', url: 'https://linkedin.com/in/anandh-raman', icon: Linkedin, label: 'LinkedIn' },
   { name: 'github', url: 'https://github.com/toymakerftw', icon: Github, label: 'GitHub' },
-  { name: 'website', url: 'https://toymakerftw.github.io', icon: Globe, label: 'Website' }
+  { name: 'website', url: 'https://toymakerftw.github.io', icon: Globe, label: 'Website' },
+  { name: 'resume', url: resumePdf, icon: BookOpen, label: 'Resume' }
 ];
 
 const experiences = [
@@ -417,6 +419,26 @@ const TerminalPortfolio = () => {
         );
       }
     },
+    resume: {
+      description: 'Download my resume',
+      execute: () => {
+        return (
+          <div className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+            <div className="flex items-center mb-4">
+              <BookOpen className="w-5 h-5 text-emerald-400 mr-2" />
+              <h2 className="text-xl font-bold text-gray-200">Download Resume</h2>
+            </div>
+            <a
+              href={resumePdf}
+              download="C.V. Anandhraman - Resume.pdf"
+              className="px-4 py-2 bg-gray-700/30 hover:bg-gray-700/50 text-emerald-400 hover:text-emerald-300 rounded-md transition-colors"
+            >
+              Download Resume
+            </a>
+          </div>
+        );
+      }
+    },
     clear: {
       description: 'Clear the terminal screen',
       execute: () => {
@@ -429,7 +451,7 @@ const TerminalPortfolio = () => {
       execute: () => {
         return (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-            {['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'contact'].map(item => (
+            {['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'contact', 'resume'].map(item => (
               <div key={item} className="text-cyan-400 hover:text-cyan-300 transition-colors">
                 {item}/
               </div>
