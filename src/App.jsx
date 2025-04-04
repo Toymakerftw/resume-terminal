@@ -1,11 +1,123 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal, User, Server, Database, GitBranch, Award, BookOpen, Code, Monitor, Activity, Package, Clock, Briefcase, Mail, Phone, Linkedin, Github, Globe, ChevronRight } from 'lucide-react';
+import { 
+  Terminal, User, Server, Database, GitBranch, Award, BookOpen, Code, 
+  Monitor, Activity, Package, Clock, Briefcase, Mail, Phone, Linkedin, 
+  Github, Globe, ChevronRight 
+} from 'lucide-react';
+
+const socialLinks = [
+  { name: 'email', url: 'mailto:mail.anandhraman@gmail.com', icon: Mail, label: 'Email' },
+  { name: 'linkedin', url: 'https://linkedin.com/in/anandh-raman', icon: Linkedin, label: 'LinkedIn' },
+  { name: 'github', url: 'https://github.com/toymakerftw', icon: Github, label: 'GitHub' },
+  { name: 'website', url: 'https://toymakerftw.github.io', icon: Globe, label: 'Website' }
+];
+
+const experiences = [
+  {
+    company: 'Turbolab Technologies',
+    position: 'Site Reliability Engineer',
+    duration: 'May 2024 - Present',
+    points: [
+      'Managed cloud infrastructure using Terraform for provisioning and automation',
+      'Designed and maintained Kubernetes clusters for scalable microservices deployment',
+      'Automated CI/CD workflows using GitLab CI/CD and GitHub Actions',
+      'Implemented monitoring solutions using Prometheus, Grafana, and ELK Stack',
+      'Developed automation scripts for infrastructure management and security compliance'
+    ]
+  },
+  {
+    company: 'PKJ Technologies',
+    position: 'Application Developer',
+    duration: 'Aug 2023 - May 2024',
+    points: [
+      'Developed a cloud-based in-house management system using MERN stack',
+      'Designed and implemented secure authentication and role-based access control',
+      'Integrated PostgreSQL, MySQL, and Redis for optimized database management',
+      'Automated deployment processes using Docker and Kubernetes',
+      'Streamlined internal workflows by automating data processing tasks'
+    ]
+  }
+];
+
+const skillCategories = [
+  {
+    title: 'Programming',
+    icon: Code,
+    skills: ['Python', 'Go', 'Bash', 'JavaScript']
+  },
+  {
+    title: 'Cloud & Infrastructure',
+    icon: Server,
+    skills: ['Terraform', 'Kubernetes', 'Docker', 'AWS', 'GCP']
+  },
+  {
+    title: 'CI/CD & Automation',
+    icon: Activity,
+    skills: ['GitLab CI/CD', 'GitHub Actions', 'Ansible', 'Jenkins']
+  },
+  {
+    title: 'Monitoring & Logging',
+    icon: Monitor,
+    skills: ['Prometheus', 'Grafana', 'ELK Stack', 'Zabbix']
+  },
+  {
+    title: 'Networking & Proxies',
+    icon: Globe,
+    skills: ['HAProxy', 'Squid Proxy', 'Nginx', 'Apache']
+  },
+  {
+    title: 'Databases',
+    icon: Database,
+    skills: ['PostgreSQL', 'MySQL', 'Redis', 'MongoDB']
+  },
+  {
+    title: 'Version Control',
+    icon: GitBranch,
+    skills: ['Git', 'GitHub', 'GitLab']
+  },
+  {
+    title: 'Operating Systems',
+    icon: Terminal,
+    skills: ['Linux (RHEL, Ubuntu, Debian)', 'Windows Server']
+  }
+];
+
+const projects = [
+  {
+    name: 'Recycler',
+    url: 'https://github.com/Toymakerftw/Recycler',
+    description: 'A centralized recycle bin for cloud and on-premise Linux servers, preventing accidental file deletion',
+    points: [
+      'Implements a master-agent architecture for distributed file recovery',
+      'Deleted files are moved to an NFS-attached storage with version control',
+      'Supports multi-node deployment for large-scale infrastructure'
+    ]
+  },
+  {
+    name: 'Triage - Intrusion Detection System',
+    url: 'https://github.com/Toymakerftw/Triage-IDS',
+    description: 'An AI-powered IDS that detects anomalies in network traffic',
+    points: [
+      'Uses an XGBoost model trained on cybersecurity datasets for anomaly detection',
+      'Designed for real-time threat monitoring and alerting',
+      'Developed in Python with a cloud-native architecture'
+    ]
+  },
+  {
+    name: 'Serversage',
+    url: 'https://github.com/Toymakerftw/Serversage',
+    description: 'A cloud-based monitoring system providing real-time insights into system health',
+    points: [
+      'Collects system metrics (CPU, memory, disk usage) from cloud and on-prem servers',
+      'Supports integration with Prometheus and Grafana for visualization'
+    ]
+  }
+];
 
 const TerminalPortfolio = () => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]);
   const [currentDirectory, setCurrentDirectory] = useState('~');
-  const [cursorPosition, setCursorPosition] = useState(0);
   const inputRef = useRef(null);
   const terminalRef = useRef(null);
 
@@ -15,14 +127,19 @@ const TerminalPortfolio = () => {
       description: 'Show available commands',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold">Available commands:</p>
-            {Object.keys(commands).map(cmd => (
-              <div key={cmd} className="grid grid-cols-12 gap-2">
-                <span className="col-span-2 text-yellow-400">{cmd}</span>
-                <span className="col-span-10 text-gray-300">{commands[cmd].description}</span>
-              </div>
-            ))}
+          <div className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+            <h3 className="text-lg font-bold text-emerald-400 mb-3">Available Commands</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {Object.entries(commands).map(([cmd, { description }]) => (
+                <div key={cmd} className="flex items-start">
+                  <ChevronRight className="w-4 h-4 text-emerald-400 mt-1 mr-2 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium text-amber-300">{cmd}</span>
+                    <p className="text-gray-300 text-sm">{description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         );
       }
@@ -31,22 +148,30 @@ const TerminalPortfolio = () => {
       description: 'Display information about me',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold mb-2">C.V. Anandhraman</p>
-            <p className="mb-2">Site Reliability Engineer with expertise in cloud infrastructure, automation, and DevOps methodologies. Proficient in Linux, Kubernetes, and cloud-native technologies. Experienced in managing scalable, resilient architectures, ensuring high availability, and optimizing system performance. Passionate about building efficient CI/CD pipelines and infrastructure automation.</p>
-            <div className="flex space-x-4 mt-2">
-              <a href="mailto:mail.anandhraman@gmail.com" className="flex items-center text-blue-400 hover:underline">
-                <Mail size={16} className="mr-1" /> Email
-              </a>
-              <a href="https://linkedin.com/in/anandh-raman" className="flex items-center text-blue-400 hover:underline">
-                <Linkedin size={16} className="mr-1" /> LinkedIn
-              </a>
-              <a href="https://github.com/toymakerftw" className="flex items-center text-blue-400 hover:underline">
-                <Github size={16} className="mr-1" /> GitHub
-              </a>
-              <a href="https://toymakerftw.github.io" className="flex items-center text-blue-400 hover:underline">
-                <Globe size={16} className="mr-1" /> Website
-              </a>
+          <div className="mt-2 p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+            <div className="flex items-center mb-4">
+              <User className="w-5 h-5 text-emerald-400 mr-2" />
+              <h2 className="text-xl font-bold text-gray-200">C.V. Anandhraman</h2>
+            </div>
+            <p className="text-gray-300/90 leading-relaxed mb-4">
+              Site Reliability Engineer with expertise in cloud infrastructure, automation, and DevOps methodologies. 
+              Proficient in Linux, Kubernetes, and cloud-native technologies. Experienced in managing scalable, 
+              resilient architectures, ensuring high availability, and optimizing system performance. Passionate 
+              about building efficient CI/CD pipelines and infrastructure automation.
+            </p>
+            <div className="flex flex-wrap gap-3 mt-4">
+              {socialLinks.map(link => (
+                <a 
+                  key={link.name} 
+                  href={link.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center px-3 py-1.5 rounded-md bg-gray-700/30 hover:bg-gray-700/50 transition-colors text-emerald-400 hover:text-emerald-300"
+                >
+                  <link.icon className="w-4 h-4 mr-2" />
+                  <span className="text-sm">{link.label}</span>
+                </a>
+              ))}
             </div>
           </div>
         );
@@ -56,38 +181,30 @@ const TerminalPortfolio = () => {
       description: 'Show my work experience',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold">Work Experience:</p>
-
-            <div className="mb-4 mt-2">
-              <div className="flex items-center">
-                <Briefcase size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Turbolab Technologies</span>
-                <span className="text-gray-400 ml-2">| Site Reliability Engineer | May 2024 - Present</span>
+          <div className="space-y-6">
+            {experiences.map(exp => (
+              <div key={exp.company} className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+                <div className="flex flex-col sm:flex-row sm:items-center mb-3 gap-1 sm:gap-3">
+                  <div className="flex items-center">
+                    <Briefcase className="w-5 h-5 text-amber-400 mr-2" />
+                    <h3 className="text-lg font-semibold text-gray-200">{exp.company}</h3>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-400">
+                    <span>{exp.position}</span>
+                    <span className="mx-2">•</span>
+                    <span>{exp.duration}</span>
+                  </div>
+                </div>
+                <ul className="space-y-2 pl-6">
+                  {exp.points.map((point, i) => (
+                    <li key={i} className="flex">
+                      <ChevronRight className="w-4 h-4 text-emerald-400 mt-1 mr-2 flex-shrink-0" />
+                      <span className="text-gray-300/90">{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="list-disc ml-8 mt-1">
-                <li>Managed cloud infrastructure using Terraform for provisioning and automation.</li>
-                <li>Designed and maintained Kubernetes clusters for scalable microservices deployment.</li>
-                <li>Automated CI/CD workflows using GitLab CI/CD and GitHub Actions.</li>
-                <li>Implemented monitoring solutions using Prometheus, Grafana, and ELK Stack.</li>
-                <li>Developed automation scripts for infrastructure management and security compliance.</li>
-              </ul>
-            </div>
-
-            <div className="mb-2">
-              <div className="flex items-center">
-                <Briefcase size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">PKJ Technologies</span>
-                <span className="text-gray-400 ml-2">| Application Developer | Aug 2023 - May 2024</span>
-              </div>
-              <ul className="list-disc ml-8 mt-1">
-                <li>Developed a cloud-based in-house management system using MERN stack.</li>
-                <li>Designed and implemented secure authentication and role-based access control.</li>
-                <li>Integrated PostgreSQL, MySQL, and Redis for optimized database management.</li>
-                <li>Automated deployment processes using Docker and Kubernetes.</li>
-                <li>Streamlined internal workflows by automating data processing tasks.</li>
-              </ul>
-            </div>
+            ))}
           </div>
         );
       }
@@ -96,49 +213,32 @@ const TerminalPortfolio = () => {
       description: 'View my projects',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold">Projects:</p>
-
-            <div className="mb-4 mt-2">
-              <div className="flex items-center">
-                <Code size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Recycler</span>
-                <a href="https://github.com/Toymakerftw/Recycler" className="ml-2 text-blue-400 hover:underline">github.com/Toymakerftw/Recycler</a>
+          <div className="space-y-6">
+            {projects.map(project => (
+              <div key={project.name} className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+                <div className="flex items-center mb-3">
+                  <Code className="w-5 h-5 text-emerald-400 mr-2" />
+                  <h3 className="text-lg font-semibold text-gray-200">{project.name}</h3>
+                  <a 
+                    href={project.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="ml-3 text-sm text-cyan-400 hover:underline flex items-center"
+                  >
+                    <Github className="w-4 h-4 mr-1" /> GitHub
+                  </a>
+                </div>
+                <p className="italic text-gray-400 mb-3">{project.description}</p>
+                <ul className="space-y-2 pl-6">
+                  {project.points.map((point, i) => (
+                    <li key={i} className="flex">
+                      <ChevronRight className="w-4 h-4 text-emerald-400 mt-1 mr-2 flex-shrink-0" />
+                      <span className="text-gray-300/90">{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className="italic mt-1">A centralized recycle bin for cloud and on-premise Linux servers, preventing accidental file deletion.</p>
-              <ul className="list-disc ml-8 mt-1">
-                <li>Implements a master-agent architecture for distributed file recovery.</li>
-                <li>Deleted files are moved to an NFS-attached storage with version control.</li>
-                <li>Supports multi-node deployment for large-scale infrastructure.</li>
-              </ul>
-            </div>
-
-            <div className="mb-4">
-              <div className="flex items-center">
-                <Code size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Triage - Intrusion Detection System</span>
-                <a href="https://github.com/Toymakerftw/Triage-IDS" className="ml-2 text-blue-400 hover:underline">github.com/Toymakerftw/Triage-IDS</a>
-              </div>
-              <p className="italic mt-1">An AI-powered IDS that detects anomalies in network traffic.</p>
-              <ul className="list-disc ml-8 mt-1">
-                <li>Uses an XGBoost model trained on cybersecurity datasets for anomaly detection.</li>
-                <li>Designed for real-time threat monitoring and alerting.</li>
-                <li>Developed in Python with a cloud-native architecture.</li>
-              </ul>
-            </div>
-
-            <div className="mb-2">
-              <div className="flex items-center">
-                <Code size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Serversage</span>
-                <a href="https://github.com/Toymakerftw/Serversage" className="ml-2 text-blue-400 hover:underline">github.com/Toymakerftw/Serversage</a>
-              </div>
-              <p className="italic mt-1">A cloud-based monitoring system providing real-time insights into system health.</p>
-              <ul className="list-disc ml-8 mt-1">
-                <li>Collects system metrics (CPU, memory, disk usage) from cloud and on-prem servers.</li>
-                <li>Supports integration with Prometheus and Grafana for visualization.</li>
-              </ul>
-            </div>
+            ))}
           </div>
         );
       }
@@ -147,74 +247,25 @@ const TerminalPortfolio = () => {
       description: 'List my technical skills',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold mb-2">Technical Skills:</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-start">
-                <Code size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">Programming</p>
-                  <p>Python, Go, Bash</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {skillCategories.map(category => (
+              <div key={category.title} className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+                <div className="flex items-center mb-3">
+                  <category.icon className="w-5 h-5 text-emerald-400 mr-2" />
+                  <h3 className="font-semibold text-gray-200">{category.title}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map(skill => (
+                    <span 
+                      key={skill} 
+                      className="px-2.5 py-1 text-sm rounded-full bg-gray-700/30 text-emerald-300"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
-
-              <div className="flex items-start">
-                <Server size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">Cloud & Infrastructure</p>
-                  <p>Terraform, Kubernetes, Docker</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <Activity size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">CI/CD & Automation</p>
-                  <p>GitLab CI/CD, GitHub Actions, Ansible</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <Monitor size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">Monitoring & Logging</p>
-                  <p>Prometheus, Grafana, ELK Stack, Zabbix</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <Globe size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">Networking & Proxies</p>
-                  <p>HAProxy, Squid Proxy, Nginx, Apache</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <Database size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">Databases</p>
-                  <p>PostgreSQL, MySQL, Redis</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <GitBranch size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">Version Control</p>
-                  <p>Git, GitHub, GitLab</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <Terminal size={16} className="text-yellow-400 mr-2 mt-1" />
-                <div>
-                  <p className="text-yellow-400">Operating Systems</p>
-                  <p>Linux (RHEL, Ubuntu, Debian)</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         );
       }
@@ -223,31 +274,27 @@ const TerminalPortfolio = () => {
       description: 'Show my educational background',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold">Education:</p>
-
-            <div className="mt-2">
-              <div className="flex items-center">
-                <BookOpen size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">B.Tech - Computer Science and Engineering</span>
-              </div>
-              <p className="ml-6">SNGCE, Kolenchery (2023)</p>
+          <div className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+            <div className="flex items-center mb-4">
+              <BookOpen className="w-5 h-5 text-emerald-400 mr-2" />
+              <h2 className="text-xl font-bold text-gray-200">Education</h2>
             </div>
-
-            <div className="mt-2">
-              <div className="flex items-center">
-                <BookOpen size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">RHCSA</span>
+            
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-amber-300">B.Tech - Computer Science and Engineering</h3>
+                <p className="text-gray-300">SNGCE, Kolenchery (2023)</p>
               </div>
-              <p className="ml-6">IPSR Solutions, Ernakulam (2017)</p>
-            </div>
-
-            <div className="mt-2">
-              <div className="flex items-center">
-                <BookOpen size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Diploma in Computer Engineering</span>
+              
+              <div>
+                <h3 className="font-semibold text-amber-300">RHCSA</h3>
+                <p className="text-gray-300">IPSR Solutions, Ernakulam (2017)</p>
               </div>
-              <p className="ml-6">Al Azhar Polytechnic College, Thodupuzha (2017)</p>
+              
+              <div>
+                <h3 className="font-semibold text-amber-300">Diploma in Computer Engineering</h3>
+                <p className="text-gray-300">Al Azhar Polytechnic College, Thodupuzha (2017)</p>
+              </div>
             </div>
           </div>
         );
@@ -257,15 +304,24 @@ const TerminalPortfolio = () => {
       description: 'View my certifications',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold">Certifications:</p>
-
-            <div className="mt-2">
-              <div className="flex items-center">
-                <Award size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">RHCSA - Red Hat Certified System Administrator</span>
+          <div className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+            <div className="flex items-center mb-4">
+              <Award className="w-5 h-5 text-emerald-400 mr-2" />
+              <h2 className="text-xl font-bold text-gray-200">Certifications</h2>
+            </div>
+            
+            <div className="space-y-3">
+              <div>
+                <h3 className="font-semibold text-amber-300">RHCSA - Red Hat Certified System Administrator</h3>
+                <a 
+                  href="https://rhtapps.redhat.com/verify?certId=170-218-770" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-cyan-400 hover:underline text-sm flex items-center"
+                >
+                  <Globe className="w-4 h-4 mr-1" /> Verify certification
+                </a>
               </div>
-              <p className="ml-6">Verified at: <a href="https://rhtapps.redhat.com/verify?certId=170-218-770" className="text-blue-400 hover:underline">Red Hat Certification Portal</a></p>
             </div>
           </div>
         );
@@ -275,44 +331,85 @@ const TerminalPortfolio = () => {
       description: 'Get my contact information',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold">Contact Information:</p>
-
-            <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+            <div className="flex items-center mb-4">
+              <Mail className="w-5 h-5 text-emerald-400 mr-2" />
+              <h2 className="text-xl font-bold text-gray-200">Contact Information</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center">
-                <Mail size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Email:</span>
-                <a href="mailto:mail.anandhraman@gmail.com" className="ml-2 text-blue-400 hover:underline">mail.anandhraman@gmail.com</a>
+                <Mail className="w-5 h-5 text-amber-400 mr-3" />
+                <div>
+                  <p className="text-sm text-gray-400">Email</p>
+                  <a 
+                    href="mailto:mail.anandhraman@gmail.com" 
+                    className="text-emerald-400 hover:underline"
+                  >
+                    mail.anandhraman@gmail.com
+                  </a>
+                </div>
               </div>
-
+              
               <div className="flex items-center">
-                <Phone size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Phone:</span>
-                <span className="ml-2">+91 70127 45003</span>
+                <Phone className="w-5 h-5 text-amber-400 mr-3" />
+                <div>
+                  <p className="text-sm text-gray-400">Phone</p>
+                  <p className="text-emerald-400">+91 70127 45003</p>
+                </div>
               </div>
-
+              
               <div className="flex items-center">
-                <Github size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">GitHub:</span>
-                <a href="https://github.com/toymakerftw" className="ml-2 text-blue-400 hover:underline">toymakerftw</a>
+                <Github className="w-5 h-5 text-amber-400 mr-3" />
+                <div>
+                  <p className="text-sm text-gray-400">GitHub</p>
+                  <a 
+                    href="https://github.com/toymakerftw" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:underline"
+                  >
+                    toymakerftw
+                  </a>
+                </div>
               </div>
-
+              
               <div className="flex items-center">
-                <Linkedin size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">LinkedIn:</span>
-                <a href="https://www.linkedin.com/in/anandh-raman-942374153" className="ml-2 text-blue-400 hover:underline">anandh-raman</a>
+                <Linkedin className="w-5 h-5 text-amber-400 mr-3" />
+                <div>
+                  <p className="text-sm text-gray-400">LinkedIn</p>
+                  <a 
+                    href="https://www.linkedin.com/in/anandh-raman-942374153" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:underline"
+                  >
+                    anandh-raman
+                  </a>
+                </div>
               </div>
-
+              
               <div className="flex items-center">
-                <Globe size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Website:</span>
-                <a href="https://toymakerftw.github.io" className="ml-2 text-blue-400 hover:underline">toymakerftw.github.io</a>
+                <Globe className="w-5 h-5 text-amber-400 mr-3" />
+                <div>
+                  <p className="text-sm text-gray-400">Website</p>
+                  <a 
+                    href="https://toymakerftw.github.io" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:underline"
+                  >
+                    toymakerftw.github.io
+                  </a>
+                </div>
               </div>
-
+              
               <div className="flex items-center">
-                <Package size={16} className="text-yellow-400 mr-2" />
-                <span className="text-yellow-400 font-bold">Location:</span>
-                <span className="ml-2">Kolenchery, Kerala, India</span>
+                <Package className="w-5 h-5 text-amber-400 mr-3" />
+                <div>
+                  <p className="text-sm text-gray-400">Location</p>
+                  <p className="text-emerald-400">Kolenchery, Kerala, India</p>
+                </div>
               </div>
             </div>
           </div>
@@ -330,46 +427,59 @@ const TerminalPortfolio = () => {
       description: 'List available sections',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-blue-400">about/</p>
-            <p className="text-blue-400">experience/</p>
-            <p className="text-blue-400">projects/</p>
-            <p className="text-blue-400">skills/</p>
-            <p className="text-blue-400">education/</p>
-            <p className="text-blue-400">certifications/</p>
-            <p className="text-blue-400">contact/</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'contact'].map(item => (
+              <div key={item} className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                {item}/
+              </div>
+            ))}
           </div>
         );
       }
     },
     whoami: {
       description: 'Display current user',
-      execute: () => <div className="mb-2">anandhraman</div>
+      execute: () => (
+        <div className="px-4 py-2 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm inline-block">
+          <span className="text-emerald-400">anandhraman</span>
+        </div>
+      )
     },
     date: {
       description: 'Display current date and time',
-      execute: () => <div className="mb-2">{new Date().toString()}</div>
+      execute: () => (
+        <div className="px-4 py-2 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm inline-block">
+          <span className="text-emerald-400">{new Date().toString()}</span>
+        </div>
+      )
     },
     summary: {
       description: 'Display a summary of information',
       execute: () => {
         return (
-          <div className="mb-2">
-            <p className="text-green-400 font-bold mb-2">Summary:</p>
-            <p className="mb-2">Site Reliability Engineer with expertise in cloud infrastructure, automation, and DevOps methodologies. Proficient in Linux, Kubernetes, and cloud-native technologies. Experienced in managing scalable, resilient architectures, ensuring high availability, and optimizing system performance.</p>
-            <div className="flex space-x-4 mt-2">
-              <a href="mailto:mail.anandhraman@gmail.com" className="flex items-center text-blue-400 hover:underline">
-                <Mail size={16} className="mr-1" /> Email
-              </a>
-              <a href="https://linkedin.com/in/anandh-raman" className="flex items-center text-blue-400 hover:underline">
-                <Linkedin size={16} className="mr-1" /> LinkedIn
-              </a>
-              <a href="https://github.com/toymakerftw" className="flex items-center text-blue-400 hover:underline">
-                <Github size={16} className="mr-1" /> GitHub
-              </a>
-              <a href="https://toymakerftw.github.io" className="flex items-center text-blue-400 hover:underline">
-                <Globe size={16} className="mr-1" /> Website
-              </a>
+          <div className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+            <div className="flex items-center mb-4">
+              <User className="w-5 h-5 text-emerald-400 mr-2" />
+              <h2 className="text-xl font-bold text-gray-200">Professional Summary</h2>
+            </div>
+            <p className="text-gray-300/90 leading-relaxed mb-4">
+              Site Reliability Engineer with expertise in cloud infrastructure, automation, and DevOps methodologies. 
+              Proficient in Linux, Kubernetes, and cloud-native technologies. Experienced in managing scalable, 
+              resilient architectures, ensuring high availability, and optimizing system performance.
+            </p>
+            <div className="flex flex-wrap gap-3 mt-4">
+              {socialLinks.map(link => (
+                <a 
+                  key={link.name} 
+                  href={link.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center px-3 py-1.5 rounded-md bg-gray-700/30 hover:bg-gray-700/50 transition-colors text-emerald-400 hover:text-emerald-300"
+                >
+                  <link.icon className="w-4 h-4 mr-2" />
+                  <span className="text-sm">{link.label}</span>
+                </a>
+              ))}
             </div>
           </div>
         );
@@ -382,14 +492,20 @@ const TerminalPortfolio = () => {
     setHistory([
       {
         type: 'output',
-        content: commands.summary.execute()
-      },
-      {
-        type: 'output',
         content: (
-          <div>
-            <p className="mb-1">Type <span className="text-yellow-400">help</span> to see available commands.</p>
-            <p>Type <span className="text-yellow-400">about</span> to learn more about me.</p>
+          <div className="animate-fadeIn">
+            {commands.summary.execute()}
+            <div className="mt-4 p-4 bg-gray-800/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
+              <p className="text-gray-300 mb-2">
+                Welcome to my interactive terminal portfolio. Here are some commands to get started:
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span className="px-2.5 py-1 text-sm rounded-full bg-gray-700/30 text-emerald-300">help</span>
+                <span className="px-2.5 py-1 text-sm rounded-full bg-gray-700/30 text-emerald-300">about</span>
+                <span className="px-2.5 py-1 text-sm rounded-full bg-gray-700/30 text-emerald-300">experience</span>
+                <span className="px-2.5 py-1 text-sm rounded-full bg-gray-700/30 text-emerald-300">projects</span>
+              </div>
+            </div>
           </div>
         )
       }
@@ -458,7 +574,13 @@ const TerminalPortfolio = () => {
           ...prev,
           {
             type: 'output',
-            content: <div className="text-red-500">Command not found: {commandName}. Type 'help' for available commands.</div>
+            content: (
+              <div className="p-3 bg-red-900/20 rounded-lg border border-red-700/50">
+                <p className="text-red-400">
+                  Command not found: <span className="font-medium">{commandName}</span>. Type <span className="text-emerald-400">help</span> for available commands.
+                </p>
+              </div>
+            )
           }
         ]);
       }
@@ -469,57 +591,60 @@ const TerminalPortfolio = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-900">
+    <div className="flex flex-col h-screen bg-gray-900 bg-opacity-95 backdrop-blur-sm">
       {/* Terminal Title Bar */}
-      <div className="bg-gray-800 p-2 flex items-center justify-between border-b border-gray-700">
-        <div className="flex items-center">
-          <Terminal size={18} className="text-green-400 mr-2" />
-          <span className="text-white font-mono">anandhraman@portfolio:~</span>
+      <div className="bg-gray-800/50 p-3 flex items-center justify-between border-b border-gray-700/50 backdrop-blur-sm">
+        <div className="flex items-center space-x-2">
+          <Terminal size={18} className="text-emerald-400" />
+          <span className="text-gray-300 font-mono text-sm">anandhraman@portfolio:~</span>
         </div>
         <div className="flex space-x-2">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <div 
+            className="w-3 h-3 rounded-full bg-red-400/80 hover:bg-red-400 cursor-pointer transition-colors"
+            onClick={() => setHistory([])}
+          ></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400/80 hover:bg-yellow-400 cursor-pointer transition-colors"></div>
+          <div className="w-3 h-3 rounded-full bg-emerald-400/80 hover:bg-emerald-400 cursor-pointer transition-colors"></div>
         </div>
       </div>
 
       {/* Terminal Content */}
       <div
         ref={terminalRef}
-        className="flex-1 bg-gray-900 p-4 font-mono text-white overflow-y-auto"
+        className="flex-1 p-4 font-mono text-gray-300 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900/50"
         onClick={handleTerminalClick}
       >
         {/* Command History */}
         {history.map((item, index) => (
-          <div key={index} className="mb-2">
+          <div key={index} className="mb-4 group">
             {item.type === 'command' && (
-              <div className="flex items-center">
-                <span className="text-green-400">anandhraman@portfolio:</span>
-                <span className="text-blue-400">{item.directory}</span>
-                <span className="text-white mx-1">$</span>
-                <span>{item.content}</span>
+              <div className="flex items-center text-sm mb-1">
+                <span className="text-emerald-400">➜</span>
+                <span className="text-cyan-400 ml-1">{currentDirectory}</span>
+                <span className="ml-2 text-gray-300 font-medium">{item.content}</span>
               </div>
             )}
 
             {item.type === 'output' && (
-              <div>{item.content}</div>
+              <div className="animate-fadeIn">{item.content}</div>
             )}
           </div>
         ))}
 
-        {/* Current Input Line */}
-        <div className="flex items-center">
-          <span className="text-green-400">anandhraman@portfolio:</span>
-          <span className="text-blue-400">{currentDirectory}</span>
-          <span className="text-white mx-1">$</span>
+        {/* Input Line */}
+        <div className="flex items-center text-sm">
+          <span className="text-emerald-400">➜</span>
+          <span className="text-cyan-400 ml-1">{currentDirectory}</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent outline-none border-none"
+            className="ml-2 flex-1 bg-transparent outline-none placeholder-gray-500 text-gray-300 font-medium caret-emerald-400"
+            placeholder="Type command..."
             autoFocus
+            spellCheck="false"
           />
         </div>
       </div>
