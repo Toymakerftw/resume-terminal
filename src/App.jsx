@@ -12,7 +12,6 @@ const socialLinks = [
   { name: 'email', url: 'mailto:mail.anandhraman@gmail.com', icon: Mail, label: 'Email' },
   { name: 'linkedin', url: 'https://linkedin.com/in/anandh-raman', icon: Linkedin, label: 'LinkedIn' },
   { name: 'github', url: 'https://github.com/toymakerftw', icon: Github, label: 'GitHub' },
-  { name: 'website', url: 'https://toymakerftw.github.io', icon: Globe, label: 'Website' },
   { name: 'resume', url: resumePdf, icon: BookOpen, label: 'Resume' }
 ];
 
