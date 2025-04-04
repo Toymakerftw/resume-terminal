@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import profileImage from './assets/profile.png';
 import resumePdf from './assets/resume.pdf';
+import { Analytics } from "@vercel/analytics/react"
 
 const socialLinks = [
   { name: 'email', url: 'mailto:mail.anandhraman@gmail.com', icon: Mail, label: 'Email' },
@@ -535,6 +536,7 @@ const TerminalPortfolio = () => {
                 ))}
               </div>
             </div>
+            <Analytics />
           </div>
         );
       }
