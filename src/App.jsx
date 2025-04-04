@@ -350,6 +350,31 @@ const TerminalPortfolio = () => {
       description: 'Display current date and time',
       execute: () => <div className="mb-2">{new Date().toString()}</div>
     },
+    summary: {
+      description: 'Display a summary of information',
+      execute: () => {
+        return (
+          <div className="mb-2">
+            <p className="text-green-400 font-bold mb-2">Summary:</p>
+            <p className="mb-2">Site Reliability Engineer with expertise in cloud infrastructure, automation, and DevOps methodologies. Proficient in Linux, Kubernetes, and cloud-native technologies. Experienced in managing scalable, resilient architectures, ensuring high availability, and optimizing system performance.</p>
+            <div className="flex space-x-4 mt-2">
+              <a href="mailto:mail.anandhraman@gmail.com" className="flex items-center text-blue-400 hover:underline">
+                <Mail size={16} className="mr-1" /> Email
+              </a>
+              <a href="https://linkedin.com/in/anandh-raman" className="flex items-center text-blue-400 hover:underline">
+                <Linkedin size={16} className="mr-1" /> LinkedIn
+              </a>
+              <a href="https://github.com/toymakerftw" className="flex items-center text-blue-400 hover:underline">
+                <Github size={16} className="mr-1" /> GitHub
+              </a>
+              <a href="https://toymakerftw.github.io" className="flex items-center text-blue-400 hover:underline">
+                <Globe size={16} className="mr-1" /> Website
+              </a>
+            </div>
+          </div>
+        );
+      }
+    }
   };
 
   // Initial welcome message
@@ -357,9 +382,12 @@ const TerminalPortfolio = () => {
     setHistory([
       {
         type: 'output',
+        content: commands.summary.execute()
+      },
+      {
+        type: 'output',
         content: (
           <div>
-            <div className="text-green-400 text-xl font-bold mb-2">Welcome to Anandhraman's Terminal Portfolio</div>
             <p className="mb-1">Type <span className="text-yellow-400">help</span> to see available commands.</p>
             <p>Type <span className="text-yellow-400">about</span> to learn more about me.</p>
           </div>
